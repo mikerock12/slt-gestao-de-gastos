@@ -42,6 +42,11 @@ def executar(pasta_entrada: str, pasta_saida: str, aviso=None, cancelado=None,
     parar = cancelado or (lambda: False)
 
     try:
+        if not os.path.isdir(pasta_entrada):
+            r.erro = ("A pasta escolhida não existe mais:\n\n"
+                      f"{pasta_entrada}\n\n"
+                      "Escolha de novo a pasta onde estão as planilhas.")
+            return r
         os.makedirs(pasta_saida, exist_ok=True)
 
         # ------------------------------------------------ 1. ler as planilhas

@@ -33,13 +33,43 @@ def roda(cmd, **kw):
         sys.exit(f"falhou: {' '.join(cmd)}")
 
 
+
+def confere_sintaxe():
+    """Compila todo .py antes de empacotar.
+
+    Um erro de sintaxe num módulo importado tarde não quebra o build: o
+    PyInstaller marca o módulo como "invalid" e segue, e o .exe só falha na
+    mão do usuário, com "No module named ...". Aqui isso vira erro na hora.
+    """
+    import py_compile
+    import tempfile
+
+    falhas = []
+    alvos = [os.path.join("app", n) for n in sorted(os.listdir(os.path.join(AQUI, "app")))
+             if n.endswith(".py")]
+    alvos += [n for n in sorted(os.listdir(AQUI)) if n.endswith(".py")]
+    for alvo in alvos:
+        try:
+            py_compile.compile(os.path.join(AQUI, alvo),
+                               cfile=os.path.join(tempfile.gettempdir(), "slt_check.pyc"),
+                               doraise=True)
+        except py_compile.PyCompileError as e:
+            falhas.append(f"{alvo}: {str(e).splitlines()[0]}")
+    if falhas:
+        sys.exit("erro de sintaxe:\n  " + "\n  ".join(falhas))
+    print(f"    {len(alvos)} módulos compilam")
+
+
 def main():
     os.chdir(AQUI)
 
-    passo(1, "ícone")
+    passo(1, "conferindo a sintaxe")
+    confere_sintaxe()
+
+    passo(2, "ícone")
     roda([sys.executable, "gerar_icone.py"])
 
-    passo(2, "bundle do relatório (esbuild)")
+    passo(3, "bundle do relatório (esbuild)")
     if not os.path.isdir(os.path.join(AQUI, "node_modules")):
         roda(["npm.cmd" if os.name == "nt" else "npm", "install"], shell=os.name == "nt")
     roda(["node", "build_relatorio.mjs"], shell=os.name == "nt")
@@ -52,7 +82,7 @@ def main():
                         os.path.join(destino, nome))
         print(f"    {nome}")
 
-    passo(4, "PyInstaller")
+    passo(5, "PyInstaller")
     roda([sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "SLT.spec"])
 
     exe = os.path.join(AQUI, "dist", "SLT - Gestão de Gastos.exe")
