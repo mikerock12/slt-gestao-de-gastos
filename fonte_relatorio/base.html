@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITULO}}</title>
+<meta name="description" content="{{DESCRICAO}}">
+<meta name="generator" content="SLT - Gestão de Gastos">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e100e'/><path d='M8 7h16v18l-3-2-2 2-3-2-3 2-2-2-3 2z' fill='%2335a87a'/><path d='M11 12h10M11 16h10M11 20h6' stroke='%230e100e' stroke-width='1.6' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600;700&display=swap">
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<noscript>
+  <div style="max-width:660px;margin:64px auto;padding:0 24px;font-family:system-ui,sans-serif;color:#e8ece7">
+    <h1 style="font-size:26px">Este relatório precisa de JavaScript</h1>
+    <p style="color:#a2ada6;line-height:1.6;margin-top:12px">
+      Os gráficos e as cenas em 3D são desenhados no próprio navegador. Habilite o
+      JavaScript e recarregue a página. Os dados brutos continuam disponíveis nos
+      arquivos CSV e JSON da pasta <code>Notas/_DADOS</code>.
+    </p>
+  </div>
+</noscript>
+<script id="slt-dados" type="application/json">{{DADOS}}</script>
+<script>window.__SLT_DADOS__ = JSON.parse(document.getElementById("slt-dados").textContent);</script>
+<script>
+{{APP}}
+</script>
+</body>
+</html>

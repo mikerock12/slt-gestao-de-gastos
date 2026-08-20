@@ -1,0 +1,37 @@
+# ------------------------------------------------------------------
+# Nada de nota fiscal, planilha ou relatório entra no repositório.
+# São dados pessoais: CPF, endereço, e tudo que a casa comprou.
+# ------------------------------------------------------------------
+*.xlsx
+*.xlsm
+Relatorio.html
+Notas/
+.cache_sefaz/
+dados.json
+dados_relatorio.json
+lojas.json
+_demo/
+_teste*/
+_saida/
+Gestao de Gastos/
+
+# artefatos de build
+build/
+dist/
+out/
+__pycache__/
+*.pyc
+*.pyo
+*.spec.bak
+recursos/relatorio/app.bundle.js
+
+# dependências
+node_modules/
+
+# sistema e editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

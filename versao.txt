@@ -1,0 +1,28 @@
+# Recurso de versão do executável (aparece nas Propriedades do arquivo no Windows).
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 0, 0, 0),
+    prodvers=(1, 0, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo([
+      StringTable(
+        '040904B0',
+        [StringStruct('CompanyName', 'SLT'),
+         StringStruct('FileDescription', 'SLT - Gestão de Gastos'),
+         StringStruct('FileVersion', '1.0.0.0'),
+         StringStruct('InternalName', 'SLT Gestao de Gastos'),
+         StringStruct('OriginalFilename', 'SLT - Gestão de Gastos.exe'),
+         StringStruct('ProductName', 'SLT - Gestão de Gastos'),
+         StringStruct('ProductVersion', '1.0.0.0'),
+         StringStruct('LegalCopyright', 'Uso pessoal')])
+    ]),
+    VarFileInfo([VarStruct('Translation', [1033, 1200])])
+  ]
+)
