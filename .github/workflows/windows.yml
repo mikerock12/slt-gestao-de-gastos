@@ -21,7 +21,9 @@ jobs:
       - run: npx esbuild fonte_relatorio/candles.js --bundle --platform=node --format=cjs --outfile=tests/candles-test-bundle.cjs
       - run: node tests/candles-test.cjs
       - run: python build.py
+      - run: '& "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" installer/setup.iss' 
+        shell: pwsh
       - uses: actions/upload-artifact@v4
         with:
           name: SLT-Gestao-de-Gastos-Windows
-          path: dist/*.exe
+          path: dist/SLT-Gestao-de-Gastos-Setup-*.exe
