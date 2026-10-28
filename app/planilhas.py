@@ -191,3 +191,30 @@ def ler_pasta(pasta: str) -> list[Planilha]:
             continue
         achadas.append(ler(os.path.join(pasta, nome)))
     return achadas
+
+
+def ler_chaves_avulsas(pasta: str) -> list[Planilha]:
+    """Arquivos .txt: uma chave de acesso por linha, com ou sem espaços."""
+    resultado = []
+    for nome in sorted(os.listdir(pasta)):
+        if not nome.lower().endswith(".txt"):
+            continue
+        caminho = os.path.join(pasta, nome)
+        p = Planilha(caminho=caminho, rotulo=_rotulo_do_arquivo(caminho))
+        with open(caminho, encoding="utf-8-sig") as f:
+            linhas = f.readlines()
+        vistas = set()
+        invalidas = 0
+        for linha in linhas:
+            if not linha.strip():
+                continue
+            chave = _digitos(linha)
+            if not valida_chave(chave):
+                invalidas += 1
+            elif chave not in vistas:
+                vistas.add(chave)
+                p.notas.append(Nota(chave=chave, origem=nome))
+        if invalidas:
+            p.avisos.append(f"{invalidas} linha(s) com chave inválida foram ignoradas")
+        resultado.append(p)
+    return resultado

@@ -1,5 +1,6 @@
 /* Monta a página inteira do relatório. */
 import gsap from "gsap";
+import { painelCandles } from "./candles.js";
 import {
   D, el, brl, pct, n0, n1, dataDia, diaParaISO, card, secao, tabela, tr, leader,
 } from "./util.js";
@@ -21,7 +22,7 @@ const dataBR = (iso) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4
 
 /* ------------------------------------------------------------ navegação */
 const SECOES = [
-  ["mapa", "Mapa"], ["alimentacao", "Alimentação"], ["higiene", "Higiene"],
+  ["candles", "Gastos"], ["mapa", "Mapa"], ["alimentacao", "Alimentação"], ["higiene", "Higiene"],
   ["medicamentos", "Remédios"], ["ritmo", "Ritmo"],
   ...(familia ? [["pessoas", "Quem"]] : []),
   ["onde", "Onde"], ["categorias", "Categorias"], ["precos", "Preços"],
@@ -205,6 +206,7 @@ function montar() {
   const torres3d = blocoTorres();
 
   const blocos = [
+    [secao("candles", "Gastos por período", "diário · semanal · mensal", "Compare o total pago com categorias e impostos estimados."), painelCandles()],
     [secao("mapa", "O mapa do consumo", `${D.dominioResumo.length} domínios`,
       `Cada um dos ${n0(R.itens)} produtos foi classificado pelo que ele é, não pela loja ` +
       "onde foi comprado — porque a descrição da nota engana muito (&ldquo;desinfetante " +

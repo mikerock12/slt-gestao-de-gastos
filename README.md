@@ -9,7 +9,7 @@ O programa lê as chaves das notas, consulta os dados públicos disponíveis da 
 
 ## O que o projeto faz
 
-- importa uma ou mais planilhas XLSX;
+- importa uma ou mais planilhas XLSX ou arquivos TXT com chaves de acesso avulsas;
 - identifica pessoas pelas informações das notas;
 - consulta dados públicos de NFC-e;
 - usa cache para não repetir consultas;
@@ -46,6 +46,7 @@ fonte_relatorio/   # front-end Three.js + GSAP
 
 O relatório inclui:
 
+- gráfico de gastos diários, semanais ou mensais com linhas por categoria e imposto estimado;
 - calendário 3D de gastos ao longo do ano;
 - categorias de consumo;
 - evolução mensal;
@@ -56,6 +57,12 @@ O relatório inclui:
 - higiene e limpeza;
 - estimativa de impostos;
 - explorador de notas e itens.
+
+## Notas avulsas e gráfico
+
+Coloque na pasta de entrada um arquivo `.txt` UTF-8 com uma chave de acesso de 44 dígitos por linha. Pode misturá-lo com planilhas do Nota Fiscal Gaúcha; chaves repetidas são consultadas uma vez. Somente NFC-e com consulta pública na SEFAZ-RS são detalhadas. Arquivos PDF, fotos e XML não são importados por este formato.
+
+No gráfico, cada corpo vai de zero ao total pago no período selecionado; não representa preços de abertura e fechamento de mercado. Linhas mostram valores dos itens classificados no período e o imposto estimado, que já está incluído nos preços. Descontos e acréscimos podem causar diferenças entre a soma dos itens e o total pago. Ração de gato depende de a descrição identificar o animal; demais produtos pet aparecem separadamente. A classificação é aproximada e merece conferência. As etiquetas à direita e a legenda mostram os valores do último período.
 
 ## Privacidade
 
