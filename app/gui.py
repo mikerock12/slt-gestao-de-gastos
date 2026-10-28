@@ -95,8 +95,8 @@ class Janela(tk.Tk):
                  font=("Segoe UI", 15), anchor="w").pack(fill="x", **pad)
         self._rotulo(
             self,
-            "Coloque numa pasta as planilhas que você baixa do site do Nota Fiscal "
-            "Gaúcha — uma por pessoa. O programa consulta cada nota na SEFAZ-RS, "
+            "Coloque numa pasta as planilhas do Nota Fiscal "
+            "Gaúcha ou arquivos TXT com uma chave de acesso por linha. O programa consulta cada nota na SEFAZ-RS, "
             "salva tudo em disco e monta o relatório.",
             wraplength=740, fg=COR["texto3"],
         ).pack(fill="x", pady=(10, 0), **pad)
@@ -104,7 +104,7 @@ class Janela(tk.Tk):
         # ---------------- pasta de entrada
         caixa = tk.Frame(self, bg=COR["fundo"])
         caixa.pack(fill="x", pady=(22, 0), **pad)
-        self._rotulo(caixa, "Pasta com as planilhas (.xlsx)").pack(fill="x")
+        self._rotulo(caixa, "Pasta com planilhas (.xlsx) ou chaves avulsas (.txt)").pack(fill="x")
         linha = tk.Frame(caixa, bg=COR["fundo"])
         linha.pack(fill="x", pady=(6, 0))
         self.campo_entrada = tk.Entry(
@@ -164,7 +164,7 @@ class Janela(tk.Tk):
 
     # ------------------------------------------------------------ eventos
     def _escolher_entrada(self):
-        p = filedialog.askdirectory(title="Pasta com as planilhas do Nota Fiscal Gaúcha")
+        p = filedialog.askdirectory(title="Pasta com planilhas ou chaves avulsas")
         if not p:
             return
         self.entrada.set(os.path.normpath(p))
@@ -185,7 +185,7 @@ class Janela(tk.Tk):
     def _comecar(self):
         entrada = self.entrada.get().strip()
         if not entrada or not os.path.isdir(entrada):
-            messagebox.showwarning(APP, "Escolha a pasta onde estão as planilhas.")
+            messagebox.showwarning(APP, "Escolha a pasta onde estão as planilhas ou chaves.")
             return
         saida = self.saida.get().strip() or _pasta_padrao_saida(entrada)
         self.saida.set(saida)

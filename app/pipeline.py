@@ -52,9 +52,9 @@ def executar(pasta_entrada: str, pasta_saida: str, aviso=None, cancelado=None,
         # ------------------------------------------------ 1. ler as planilhas
         diz("Lendo as planilhas…")
         marca("planilhas", 0, 1)
-        arquivos = planilhas.ler_pasta(pasta_entrada)
+        arquivos = planilhas.ler_pasta(pasta_entrada) + planilhas.ler_chaves_avulsas(pasta_entrada)
         if not arquivos:
-            r.erro = ("Nenhuma planilha .xlsx encontrada na pasta escolhida.\n\n"
+            r.erro = ("Nenhuma planilha .xlsx ou arquivo .txt de chaves encontrado na pasta escolhida.\n\n"
                       "Coloque ali o arquivo que você baixa do site do Nota Fiscal "
                       "Gaúcha (um por pessoa) e tente de novo.")
             return r
@@ -64,7 +64,7 @@ def executar(pasta_entrada: str, pasta_saida: str, aviso=None, cancelado=None,
             for a in p.avisos:
                 r.avisos.append(f"{os.path.basename(p.caminho)}: {a}")
         if not com_notas:
-            r.erro = ("As planilhas foram abertas, mas nenhuma chave de acesso "
+            r.erro = ("Os arquivos foram abertos, mas nenhuma chave de acesso "
                       "válida foi encontrada.\n\nConfira se o arquivo é mesmo o "
                       "export do Nota Fiscal Gaúcha, com a coluna "
                       "\"Chave de Acesso\".")
