@@ -80,14 +80,14 @@ export function painelRitmo() {
     html: `<svg viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" role="img"
       aria-label="Gasto semanal" style="width:100%;height:190px;overflow:visible">
       <defs><linearGradient id="gsem" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#35a87a" stop-opacity=".34"/>
-        <stop offset="100%" stop-color="#35a87a" stop-opacity="0"/></linearGradient></defs>
+        <stop offset="0%" stop-color="#ffa04d" stop-opacity=".34"/>
+        <stop offset="100%" stop-color="#ffa04d" stop-opacity="0"/></linearGradient></defs>
       <line x1="0" y1="${y(mediana)}" x2="${W}" y2="${y(mediana)}" stroke="#3a423a"
         stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
       <path d="${area}" fill="url(#gsem)"/>
-      <path d="${linha}" fill="none" stroke="#35a87a" stroke-width="2" stroke-linejoin="round"
+      <path d="${linha}" fill="none" stroke="#ffa04d" stroke-width="2" stroke-linejoin="round"
         stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-      <circle id="ptSem" r="4" fill="#35a87a" stroke="#0e100e" stroke-width="2" opacity="0"/>
+      <circle id="ptSem" r="4" fill="#ffa04d" stroke="#111114" stroke-width="2" opacity="0"/>
     </svg>`,
   });
   const infoSem = el("p", { class: "legenda", style: { marginTop: "12px" },
@@ -175,8 +175,8 @@ export function painelLojas() {
       [barra({ nome: `outros ${resto.length} estabelecimentos`, valor: somaResto, max })]) : null,
   ]);
 
-  const menos = card("Onde menos se comprou", "uma ou duas visitas", [
-    tabela([{ t: "Loja" }, { t: "Visitas", n: 1 }, { t: "Total", n: 1 }],
+  const menos = card("Onde menos se gastou", "ordenado pelo gasto", [
+    tabela([{ t: "Loja" }, { t: "Notas", n: 1 }, { t: "Total", n: 1 }],
       D.lojas.slice(-8).reverse().map((l) =>
         tr([l.nome, { v: l.notas, n: 1, dim: 1 }, { v: brl(l.total), n: 1 }]))),
   ]);

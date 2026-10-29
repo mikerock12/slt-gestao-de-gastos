@@ -39,13 +39,13 @@ export const unidade = (it) => D.unidades[it[IB.un]] || "";
 
 /* Rampa de uma matiz só: a cor codifica magnitude/posição, nunca identidade —
    o nome sempre acompanha. */
-export const RAMPA = ["#6ee7b0", "#4ec397", "#41b489", "#37a67c", "#2f9770",
-  "#288964", "#227b59", "#1c6d4e", "#175f44", "#12523a"];
+export const RAMPA = ["#ffd2a6", "#ffb873", "#ffa04d", "#ed8836", "#d9762b",
+  "#c16a28", "#a95a22", "#914b1c", "#793e19", "#633116"];
 export const corPorRank = (i, total) =>
   RAMPA[Math.round((total <= 1 ? 0 : i / (total - 1)) * (RAMPA.length - 1))];
 
 /* Escala ordinal de processamento (NOVA). Validada para daltonismo. */
-export const COR_NOVA = { real: "#35a87a", proc: "#a678c8", ultra: "#d4614c" };
+export const COR_NOVA = { real: "#ffa04d", proc: "#a678c8", ultra: "#d4614c" };
 
 /* --------------------------------------------------------------- DOM */
 export function el(tag, attrs = {}, filhos = []) {

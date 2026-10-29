@@ -1,6 +1,7 @@
 /* Monta a página inteira do relatório. */
 import gsap from "gsap";
 import { painelCandles } from "./candles.js";
+import { painelAnalitico } from "./analitica.js";
 import {
   D, el, brl, pct, n0, n1, dataDia, diaParaISO, card, secao, tabela, tr, leader,
 } from "./util.js";
@@ -22,7 +23,7 @@ const dataBR = (iso) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}/${iso.slice(0, 4
 
 /* ------------------------------------------------------------ navegação */
 const SECOES = [
-  ["candles", "Gastos"], ["mapa", "Mapa"], ["alimentacao", "Alimentação"], ["higiene", "Higiene"],
+  ["candles", "Gastos"], ["analitica", "Compras"], ["mapa", "Mapa"], ["alimentacao", "Alimentação"], ["higiene", "Higiene"],
   ["medicamentos", "Remédios"], ["ritmo", "Ritmo"],
   ...(familia ? [["pessoas", "Quem"]] : []),
   ["onde", "Onde"], ["categorias", "Categorias"], ["precos", "Preços"],
@@ -84,7 +85,7 @@ function abertura() {
     el("p", { class: "sub", text:
       `${n0(R.notas)} cupons fiscais consultados na SEFAZ-RS, ${n0(R.itens)} produtos ` +
       "lidos um a um e classificados por grupo alimentar, grau de processamento, " +
-      "higiene, limpeza e medicamento. Clique no calendário abaixo para entrar em " +
+      "higiene, limpeza e medicamento. Abra o calendário opcional para entrar em " +
       "qualquer dia do período." }),
   ]);
 }
@@ -127,8 +128,8 @@ function blocoTorres() {
   return { node, iniciar };
 }
 function corDaTorre(t, total) {
-  const RAMPA = ["#6ee7b0", "#4ec397", "#41b489", "#37a67c", "#2f9770",
-    "#288964", "#227b59", "#1c6d4e", "#175f44", "#12523a"];
+  const RAMPA = ["#ffd2a6", "#ffb873", "#ffa04d", "#ed8836", "#d9762b",
+    "#c16a28", "#a95a22", "#914b1c", "#793e19", "#633116"];
   return RAMPA[Math.round((total <= 1 ? 0 : t.rank / (total - 1)) * (RAMPA.length - 1))];
 }
 
@@ -193,10 +194,11 @@ function montar() {
 
   wrap.append(abertura());
   const cal = blocoCalendario();
-  wrap.append(el("div", { style: { marginTop: "38px" } }, [cal.node]));
+  const calendarioOpcional = el("details", { class: "opcional" }, [el("summary", {text:"Explorar calendário 3D (opcional)"}), cal.node]);
+  calendarioOpcional.addEventListener("toggle", () => { if (calendarioOpcional.open && !calendarioOpcional.dataset.iniciado) { calendarioOpcional.dataset.iniciado = "1"; try { cal.iniciar(); } catch { calendarioOpcional.append(el("p", {text:"Visualização 3D indisponível neste navegador. Os demais dados continuam acessíveis."})); } } });
 
   const faixa = el("div", { style: { marginTop: "38px" } }, [faixaKpis()]);
-  wrap.append(faixa);
+  wrap.append(faixa, calendarioOpcional);
 
   const alcool = A.grupos.find((g) => g.nome === "Bebidas alcoólicas");
   const frutasVerduras =
@@ -207,6 +209,7 @@ function montar() {
 
   const blocos = [
     [secao("candles", "Gastos por período", "diário · semanal · mensal", "Compare o total pago com categorias e impostos estimados."), painelCandles()],
+    [secao("analitica", "Compras em detalhe", "frequência · marcas", "Compare estabelecimentos, produtos e marcas identificadas nas descrições."), painelAnalitico()],
     [secao("mapa", "O mapa do consumo", `${D.dominioResumo.length} domínios`,
       `Cada um dos ${n0(R.itens)} produtos foi classificado pelo que ele é, não pela loja ` +
       "onde foi comprado — porque a descrição da nota engana muito (&ldquo;desinfetante " +
@@ -250,12 +253,10 @@ function montar() {
       `${D.lojas[0].nome} concentra ${pct(D.lojas[0].share)} de tudo, em ${D.lojas[0].notas} ` +
       `notas. Clique numa barra para ver o detalhe da loja.`), painelLojas()],
 
-    [secao("categorias", "As torres do consumo",
+    [secao("categorias", "Categorias de produtos",
       `${n0(R.itens)} itens · ${D.categorias.length} categorias`,
-      "Cada torre é uma categoria de produto, com a altura proporcional ao gasto e fatiada " +
-      "pelos meses do período — dá para ver de relance o que é constante e o que foi compra " +
-      "pontual. Clique numa torre para entrar nela."),
-      torres3d.node, painelCategorias()],
+      "Compare os valores por categoria. A visualização 3D pode ser aberta abaixo."),
+      painelCategorias(), el("details", {class:"opcional", ontoggle:(e) => {const d=e.currentTarget;if(d.open && !d.dataset.iniciado){d.dataset.iniciado="1";try{torres3d.iniciar();}catch{d.append(el("p",{text:"Visualização 3D indisponível neste navegador."}));}}}}, [el("summary",{text:"Explorar torres 3D (opcional)"}), torres3d.node])],
 
     [secao("precos", "O que subiu e o que caiu",
       `${D.precoMeta.amostra} produtos rastreáveis`,
@@ -303,8 +304,7 @@ function montar() {
   revelar(paraRevelar.filter(Boolean));
 
   // agora que tudo está no documento e com tamanho, as cenas podem nascer
-  cal.iniciar();
-  torres3d.iniciar();
+
 }
 
 if (document.readyState === "loading") {

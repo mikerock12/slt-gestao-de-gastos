@@ -1,19 +1,19 @@
 /* SLT — Gestão de Gastos · folha de estilo do relatório */
 
 :root {
-  --void: #0a0c0a;
-  --ground: #0e100e;
-  --surface: #171a17;
-  --surface-2: #1e221e;
-  --rule: #272c27;
-  --rule-2: #3a423a;
-  --ink: #e8ece7;
-  --ink-2: #a2ada6;
-  --ink-3: #78837c;
-  --mate: #35a87a;
+  --void: #0b0c0f;
+  --ground: #111114;
+  --surface: #1b1918;
+  --surface-2: #27221e;
+  --rule: #493a30;
+  --rule-2: #695244;
+  --ink: #f7eee8;
+  --ink-2: #d5c2b3;
+  --ink-3: #ae9d90;
+  --mate: #ffa04d;
   --plum: #a96cc9;
   --ember: #e0725a;
-  --nova-real: #35a87a;
+  --nova-real: #ffa04d;
   --nova-proc: #a678c8;
   --nova-ultra: #d4614c;
 
@@ -295,3 +295,38 @@ code { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2)
 .oculto { display: none !important; }
 .reveal { opacity: 0; transform: translateY(18px); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
+
+/* Leitura e comparações em primeiro plano. */
+.wrap { max-width: 1360px; }
+section { margin-top: 54px; }
+.analitica { display:grid; gap:18px; }
+.analitica h3 { font-size:21px; margin-bottom:8px; }
+.analitica .legenda, .grafico-card .legenda { font-family:var(--sans); font-size:14px; color:var(--ink-2); margin:10px 0 16px; }
+.filtros-analise { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:18px 0; }
+.filtros-analise label:last-child { grid-column:1 / -1; }
+.filtros-analise label, .grafico-cabecalho label { display:grid; gap:6px; font-weight:600; color:var(--ink); }
+.filtros-analise :is(input,select), .grafico-card select { width:100%; background:var(--surface-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:5px; padding:10px; font:inherit; }
+.grafico-cabecalho { display:flex; align-items:end; gap:24px; flex-wrap:wrap; }
+.grafico-cabecalho p { color:var(--ink-2); }
+.series-fieldset { border:1px solid var(--rule); margin:16px 0; padding:12px; border-radius:6px; }
+.series-controles { display:flex; gap:10px 20px; flex-wrap:wrap; }
+.series-controles label { display:flex; align-items:center; gap:6px; font-size:14px; }
+.series-controles i { width:15px; height:4px; display:inline-block; }
+.paginacao-grafico { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.paginacao-grafico button { background:var(--surface-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:4px; padding:8px 10px; }
+.paginacao-grafico button:disabled { opacity:.4; cursor:default; }
+.grafico-periodos { overflow-x:auto; margin-top:12px; }
+.grafico-periodos svg { display:block; width:100%; min-width:760px; height:auto; }
+.valores-finais { display:flex; flex-wrap:wrap; gap:8px; }
+.valores-finais span { border-left:4px solid; background:var(--surface-2); padding:6px 9px; font-size:13px; }
+.opcional { margin-top:20px; padding:14px; border:1px solid var(--rule); border-radius:6px; }
+.opcional summary { cursor:pointer; font-weight:600; color:var(--mate); }
+.opcional .tabwrap { margin-top:16px; }
+.barra .nome,.leader .nome { white-space:normal; overflow:visible; }
+@media(max-width:640px) { .filtros-analise {grid-template-columns:1fr} .filtros-analise label:last-child{grid-column:auto} }
+.kpis { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.kpi { min-width:0; }
+.kpi .v { white-space:normal; overflow-wrap:anywhere; }
+@media(max-width:760px) { .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.grade > *, .analitica > *, .card, .tabwrap { min-width:0; }
+.kpi .n { overflow-wrap:anywhere; }
