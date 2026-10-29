@@ -19,7 +19,7 @@ export function compararMarcas(dados, categoria, produto, nomes) {
     const m=encontrados[0]; m.total+=item[4]; m.linhas++; m.notas.add(item[12]);
     const v=m.descricoes.get(descricao) || {desc:descricao,total:0,linhas:0}; v.total+=item[4];v.linhas++;m.descricoes.set(descricao,v);
   }
-  return {elegiveis, semMarca, ambiguos, marcas:grupos.filter(x=>x.linhas).map(m=>({...m,notas:m.notas.size,descricoes:[...m.descricoes.values()].sort((a,b)=>b.total-a.total)})).sort((a,b)=>b.total-a.total)};
+  return {elegiveis, semMarca, ambiguos, marcas:grupos.filter(x=>x.linhas).map(m=>({...m,notas:m.notas.size,descricoes:[...m.descricoes.values()].sort((a,b)=>b.total-a.total)})).sort((a,b)=>b.linhas-a.linhas || b.total-a.total)};
 }
 export function visitasLojas(dados) {
   const lojas=new Map();
@@ -62,7 +62,7 @@ export function painelAnalitico() {
   return el('div',{class:'analitica'},[
     el('div',{class:'card'},[el('h3',{text:'Estabelecimentos mais frequentados'}),el('p',{class:'legenda',text:'Ordenado por dias distintos com compras, depois por notas. Duas notas no mesmo dia contam um dia; isso não comprova visitas físicas. Lojas são agrupadas pelo nome usado no relatório.'}),
       tabela([{t:'Estabelecimento'},{t:'Dias com compra',n:1},{t:'Notas',n:1},{t:'Total pago',n:1},{t:'Por nota',n:1}],lista)]),
-    el('div',{class:'card'},[el('h3',{text:'Compare marcas por produto'}),el('p',{class:'legenda',text:'Selecione a categoria, filtre pelo nome do produto e edite a lista de marcas separadas por vírgulas. O reconhecimento procura palavras inteiras na descrição; não confirma a marca real e pode perder abreviações. Confira as descrições. Valores são dos itens, antes de descontos ou acréscimos da nota.'}),
+    el('div',{class:'card'},[el('h3',{text:'Compare marcas por produto'}),el('p',{class:'legenda',text:'Selecione a categoria, filtre pelo nome do produto e edite a lista de marcas separadas por vírgulas. O ranking ordena pelo número de linhas de itens; o reconhecimento procura palavras inteiras na descrição; não confirma a marca real e pode perder abreviações. Confira as descrições. Valores são dos itens, antes de descontos ou acréscimos da nota.'}),
       el('div',{class:'filtros-analise'},[el('label',{},['Categoria',categoria]),el('label',{},['Produto na descrição',produto]),el('label',{},['Marcas para procurar',marcas])]),resultado]),
     el('div',{class:'card'},[el('h3',{text:'Produtos que mais se repetem'}),el('p',{class:'legenda',text:'Usa os mesmos filtros de categoria e produto acima; cada linha representa uma descrição exatamente como aparece na nota.'}),produtos])]);
 }
