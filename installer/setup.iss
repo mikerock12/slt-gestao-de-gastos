@@ -1,5 +1,5 @@
 #define AppName "SLT - Gestao de Gastos"
-#define AppVersion "1.1.0"
+#define AppVersion "1.2.0"
 [Setup]
 AppId={{BFC8B30A-E82D-452F-83B5-B98713BB5123}
 AppName={#AppName}
@@ -9,7 +9,7 @@ DefaultDirName={localappdata}\Programs\SLT Gestao de Gastos
 DefaultGroupName={#AppName}
 PrivilegesRequired=lowest
 OutputDir=..\dist
-OutputBaseFilename=SLT-Gestao-de-Gastos-Setup-1.1.0
+OutputBaseFilename=SLT-Gestao-de-Gastos-Setup-1.2.0
 SetupIconFile=..\recursos\slt.ico
 Compression=lzma2
 SolidCompression=yes

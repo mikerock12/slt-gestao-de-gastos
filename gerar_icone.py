@@ -4,9 +4,9 @@ import os
 
 from PIL import Image, ImageDraw
 
-FUNDO = (14, 16, 14, 255)
-PAPEL = (53, 168, 122, 255)
-LINHA = (14, 16, 14, 255)
+FUNDO = (17, 17, 20, 255)
+PAPEL = (255, 160, 77, 255)
+LINHA = (17, 17, 20, 255)
 
 
 def desenha(lado: int) -> Image.Image:

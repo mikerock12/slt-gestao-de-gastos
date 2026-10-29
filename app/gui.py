@@ -20,9 +20,9 @@ from .pipeline import executar
 APP = "SLT — Gestão de Gastos"
 
 COR = {
-    "fundo": "#0e100e", "painel": "#171a17", "campo": "#1e221e",
-    "linha": "#272c27", "texto": "#e8ece7", "texto2": "#a2ada6",
-    "texto3": "#78837c", "mate": "#35a87a", "erro": "#e0725a",
+    "fundo": "#111114", "painel": "#1b1918", "campo": "#27221e",
+    "linha": "#493a30", "texto": "#f7eee8", "texto2": "#d5c2b3",
+    "texto3": "#a99a8e", "mate": "#ffa04d", "erro": "#e0725a",
 }
 
 
@@ -81,7 +81,7 @@ class Janela(tk.Tk):
             font=("Segoe UI", 10, "bold" if principal else "normal"),
             bg=COR["mate"] if principal else COR["campo"],
             fg=COR["fundo"] if principal else COR["texto"],
-            activebackground="#2c8f68" if principal else COR["linha"],
+            activebackground="#ffb879" if principal else COR["linha"],
             activeforeground=COR["fundo"] if principal else COR["texto"],
             bd=0, padx=18, pady=9, disabledforeground=COR["texto3"],
         )

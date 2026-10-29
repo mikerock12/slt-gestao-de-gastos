@@ -22,6 +22,8 @@ jobs:
       - run: python -m unittest discover -s tests
       - run: npx esbuild fonte_relatorio/candles.js --bundle --platform=node --format=cjs --outfile=tests/candles-test-bundle.cjs
       - run: node tests/candles-test.cjs
+      - run: npx esbuild fonte_relatorio/analitica.js --bundle --platform=node --format=cjs --outfile=tests/analitica-test-bundle.cjs
+      - run: node tests/analitica-test.cjs
       - run: python build.py
       - run: '& "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" installer/setup.iss' 
         shell: pwsh

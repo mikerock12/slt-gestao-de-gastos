@@ -55,14 +55,14 @@ function montarCena(hospedeiro, { posInicial, alvoInicial, fov = 40, fog }) {
   hospedeiro.append(renderer.domElement);
 
   const cena = new THREE.Scene();
-  cena.background = new THREE.Color("#0a0c0a");
-  cena.fog = new THREE.Fog("#0a0c0a", fog[0], fog[1]);
+  cena.background = new THREE.Color("#0b0c0f");
+  cena.fog = new THREE.Fog("#0b0c0f", fog[0], fog[1]);
 
   const camera = new THREE.PerspectiveCamera(fov, 1, 0.1, 400);
   camera.position.set(...posInicial);
 
   cena.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const l1 = new THREE.DirectionalLight(0xdff5e9, 1.45);
+  const l1 = new THREE.DirectionalLight(0xffe6d2, 1.45);
   l1.position.set(12, 20, 10);
   cena.add(l1);
   const l2 = new THREE.DirectionalLight(0x8f6fd0, 0.5);
@@ -237,7 +237,7 @@ export function calendario(hospedeiro) {
   malha.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   ctx.cena.add(malha);
 
-  const baixo = new THREE.Color("#0f3a2a"), alto = new THREE.Color("#7bf0bd");
+  const baixo = new THREE.Color("#713b16"), alto = new THREE.Color("#ffbd7e");
   const cores = new Float32Array(celulas.length * 3);
   celulas.forEach((c, i) => {
     const t = maxTotal ? Math.pow(c.total / maxTotal, 0.5) : 0;
@@ -247,7 +247,7 @@ export function calendario(hospedeiro) {
 
   const piso = new THREE.Mesh(
     new THREE.PlaneGeometry(largura + 6, profundidade + 5),
-    new THREE.MeshStandardMaterial({ color: "#0c0f0c", roughness: 1 }));
+    new THREE.MeshStandardMaterial({ color: "#14110f", roughness: 1 }));
   piso.rotation.x = -Math.PI / 2;
   piso.position.y = -0.02;
   ctx.cena.add(piso);
@@ -255,7 +255,7 @@ export function calendario(hospedeiro) {
   for (const x of marcas) {
     const m = new THREE.Mesh(
       new THREE.PlaneGeometry(0.05, profundidade + 3),
-      new THREE.MeshBasicMaterial({ color: "#2c4438" }));
+      new THREE.MeshBasicMaterial({ color: "#594031" }));
     m.rotation.x = -Math.PI / 2;
     m.position.set(x - PASSO * 0.62, 0.01, 0);
     ctx.cena.add(m);
@@ -281,7 +281,7 @@ export function calendario(hospedeiro) {
       dummy.updateMatrix();
       malha.setMatrixAt(i, dummy.matrix);
       if (sel) cor.set("#ffffff");
-      else if (ativo === i) cor.set("#d8fff0");
+      else if (ativo === i) cor.set("#fff0dc");
       else {
         const f = selecionado !== null ? 0.4 : 1;
         cor.setRGB(cores[i * 3] * f, cores[i * 3 + 1] * f, cores[i * 3 + 2] * f);
@@ -483,7 +483,7 @@ export function torres(hospedeiro) {
     segmentos.length);
   malha.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   ctx.cena.add(malha);
-  ctx.cena.add(new THREE.GridHelper(26, 13, 0x1c2620, 0x141a16));
+  ctx.cena.add(new THREE.GridHelper(26, 13, 0x33241c, 0x211b18));
 
   const cores = new Float32Array(segmentos.length * 3);
   const c0 = new THREE.Color();

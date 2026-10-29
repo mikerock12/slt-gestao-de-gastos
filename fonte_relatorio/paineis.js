@@ -501,9 +501,9 @@ export function painelMedicamentos() {
         text: "Nenhum medicamento identificado nas notas do período." })]);
   }
   const CORES = {
-    "sem receita": "#35a87a", "receita simples": "#a678c8",
+    "sem receita": "#ffa04d", "receita simples": "#a678c8",
     "receita obrigatória": "#d4614c", "receita controlada": "#d4614c",
-    "não classificado": "#78837c",
+    "não classificado": "#ae9d90",
   };
   const porReceita = new Map();
   for (const c of M.classes) {
@@ -557,7 +557,7 @@ export function painelMedicamentos() {
             .map(([r, a]) => el("div", { class: "barra" }, [
               el("span", { class: "nome" }, [r, el("small", { text: `${a.itens} itens` })]),
               el("span", { class: "trilha" }, [el("i", {
-                style: { width: `${(100 * a.total) / M.total}%`, background: CORES[r] || "#78837c" } })]),
+                style: { width: `${(100 * a.total) / M.total}%`, background: CORES[r] || "#ae9d90" } })]),
               el("span", { class: "val", text: brl(a.total) }),
             ]))),
           el("p", { class: "legenda", style: { marginTop: "16px" }, text:
@@ -579,8 +579,8 @@ export function painelMedicamentos() {
               { t: "Onde" }, { t: "Valor", n: 1 }],
         M.linha.map((l) => tr([
           { v: dataDia(l.data), n: 1, dim: 1 }, l.desc, { v: l.classe, dim: 1 },
-          el("span", { class: "pill", style: { color: CORES[l.receita] || "#78837c",
-            background: `${CORES[l.receita] || "#78837c"}1f` }, text: l.receita }),
+          el("span", { class: "pill", style: { color: CORES[l.receita] || "#ae9d90",
+            background: `${CORES[l.receita] || "#ae9d90"}1f` }, text: l.receita }),
           { v: l.loja, dim: 1 }, { v: brl(l.valor), n: 1 },
         ]))),
     ]),

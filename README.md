@@ -46,7 +46,9 @@ fonte_relatorio/   # front-end Three.js + GSAP
 
 O relatório inclui:
 
-- gráfico de gastos diários, semanais ou mensais com linhas por categoria e imposto estimado;
+- gráfico de gastos diários, semanais ou mensais, com seleção de linhas, navegação por períodos e tabela de valores;
+- ranking de estabelecimentos por dias com compra, notas, gasto e ticket médio;
+- comparação de marcas por categoria e termo de produto, e ranking de descrições mais frequentes;
 - calendário 3D de gastos ao longo do ano;
 - categorias de consumo;
 - evolução mensal;
@@ -63,6 +65,14 @@ O relatório inclui:
 Coloque na pasta de entrada um arquivo `.txt` UTF-8 com uma chave de acesso de 44 dígitos por linha. Pode misturá-lo com planilhas do Nota Fiscal Gaúcha; chaves repetidas são consultadas uma vez. Somente NFC-e com consulta pública na SEFAZ-RS são detalhadas. Arquivos PDF, fotos e XML não são importados por este formato.
 
 No gráfico, cada corpo vai de zero ao total pago no período selecionado; não representa preços de abertura e fechamento de mercado. Linhas mostram valores dos itens classificados no período e o imposto estimado, que já está incluído nos preços. Descontos e acréscimos podem causar diferenças entre a soma dos itens e o total pago. Ração de gato depende de a descrição identificar o animal; demais produtos pet aparecem separadamente. A classificação é aproximada e merece conferência. As etiquetas à direita e a legenda mostram os valores do último período.
+
+### Como interpretar as análises
+
+O ranking de estabelecimentos conta dias distintos com nota em cada nome de loja, e não confirma visitas físicas; várias notas no mesmo dia contam um dia. Nomes agrupados pelo relatório podem reunir filiais. O ticket é o total dividido pelo número de notas.
+
+Em **Compras em detalhe**, escolha uma categoria e informe o produto na descrição. A lista de marcas pode ser editada, separando os nomes por vírgulas. O programa procura palavras inteiras nas descrições, sem acesso a um campo oficial de marca: abreviações ou marcas ausentes não são reconhecidas, e descrições com mais de uma marca procurada ficam fora do ranking. Confira as descrições exibidas antes de tirar conclusões. O ranking de produtos conta linhas e notas por descrição exata, não unidades comparáveis; embalagens e quantidades podem variar. Os valores de itens são anteriores a descontos e acréscimos da nota.
+
+As visualizações 3D são opcionais. O relatório usa as notas consultadas com sucesso; falhas, NF-e sem detalhamento e compras sem nota não aparecem nos gráficos.
 
 ## Privacidade
 
